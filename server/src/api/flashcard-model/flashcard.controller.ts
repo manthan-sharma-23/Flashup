@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -33,7 +34,7 @@ export default class FlashCardController {
     return await this.flashCardService.create_flash_card(req);
   }
 
-  @Post('/delete-flashcard/:flashCardId')
+  @Delete('/delete-flashcard/:flashCardId')
   @UseGuards(AuthenticateJWTToken)
   async delete_flash_card(
     @Param() { flashCardId }: { flashCardId: string },
@@ -42,12 +43,21 @@ export default class FlashCardController {
     return await this.flashCardService.delete_flash_card(flashCardId, req);
   }
 
-  @Put('/update-flashcard/:flashCardId')
+  @Put('/update_flash_card/:flashCardId')
   @UseGuards(AuthenticateJWTToken)
   async update_flash_card(
     @Param() { flashCardId }: { flashCardId: string },
     @Req() req: Request,
   ) {
     return await this.flashCardService.update_flash_card(flashCardId, req);
+  }
+
+  @Put('/bookmark/:flashCardId')
+  @UseGuards(AuthenticateJWTToken)
+  async bookmark_flash_card(
+    @Param() { flashCardId }: { flashCardId: string },
+    @Req() req: Request,
+  ) {
+    return await this.flashCardService.bookmark_flash_card(flashCardId, req);
   }
 }

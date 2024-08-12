@@ -11,10 +11,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import Server from "@/core/api/api";
 import { toast } from "sonner";
 import { AuthenticateUser } from "@/core/lib/types/user.types";
 import { useMutation } from "@tanstack/react-query";
+import UserModule from "@/core/api/user.module";
 
 export default function Signup() {
   const [user, setUser] = useState<Partial<AuthenticateUser>>({});
@@ -27,7 +27,7 @@ export default function Signup() {
   };
 
   const { mutate, isPending: loading } = useMutation({
-    mutationFn: new Server().user.register_user,
+    mutationFn: new UserModule().user.register_user,
     onSuccess: (data) => {
       if (data.isLoggedIn) {
         toast.success("User registered successfully !!");

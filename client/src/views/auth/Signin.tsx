@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Server from "@/core/api/api";
+import UserModule from "@/core/api/user.module";
 import { AuthenticateUser } from "@/core/lib/types/user.types";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
@@ -20,7 +20,7 @@ const Signin = () => {
   const navigate = useNavigate();
 
   const { mutate, isPending: loading } = useMutation({
-    mutationFn: new Server().user.login_user,
+    mutationFn: new UserModule().user.login_user,
     onSuccess: (data) => {
       if (data.isLoggedIn) {
         toast.success("User logged in successfully !!");
