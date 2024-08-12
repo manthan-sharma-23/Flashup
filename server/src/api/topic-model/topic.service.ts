@@ -38,13 +38,20 @@ export default class TopicService {
     const { userId } = req.user;
     await this.is_topic_owned(userId, topicId);
 
-    const flashCards = await this.databaseService.flashcard.findMany({
+    const topic = await this.databaseService.topic.findUnique({
       where: {
-        topicId,
+        id: topicId,
+      },
+      include: {
+        flashcards: {
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
       },
     });
 
-    return flashCards;
+    return topic;
   }
 
   async is_topic_owned(userId: string, topicId: string) {

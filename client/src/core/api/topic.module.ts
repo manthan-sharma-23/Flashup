@@ -41,7 +41,7 @@ export default class TopicModule {
           Authorization: this.token,
         },
       })
-    ).data as Flashcard[];
+    ).data as Topic;
     return data;
   };
 

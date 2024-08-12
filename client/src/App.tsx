@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RootLayout from "./components/layouts/RootLayout";
 import Dashboard from "./views/app/Dashboard/Dashboard";
 import Explore from "./views/app/Explore/Explore";
+import TopicPage from "./views/app/Topic/TopicPage";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -22,6 +23,10 @@ const App = () => {
               </Route>
               <Route path="/" element={<RootLayout />}>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route
+                  path="/dashboard/topic/:topicId"
+                  element={<TopicPage />}
+                />
                 <Route path="/explore" element={<Explore />} />
               </Route>
             </Routes>

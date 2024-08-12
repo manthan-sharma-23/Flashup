@@ -20,10 +20,12 @@ export interface Bookmark {
 export interface Topic {
   id: string;
   name: string;
+  description?: string;
   flashcards: Flashcard[];
   createdAt: Date;
   User: User;
   userId: string;
+  isActive: boolean;
 }
 
 export interface Flashcard {

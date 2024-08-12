@@ -22,6 +22,16 @@ export default class FlashCardModule {
     ).data as Flashcard;
     return data;
   };
+  private get_flash_cards_by_user = async () => {
+    const data = (
+      await axios.get(this.base_url + `/user/fc`, {
+        headers: {
+          Authorization: this.token,
+        },
+      })
+    ).data as Flashcard[];
+    return data;
+  };
 
   private get_all_flash_cards = async () => {
     const data = (
@@ -45,7 +55,7 @@ export default class FlashCardModule {
           },
         }
       )
-    ).data as Flashcard[];
+    ).data as Flashcard;
     return data;
   };
 
@@ -105,6 +115,7 @@ export default class FlashCardModule {
       delete_flash_card: this.delete_flash_card,
       update_flash_card: this.update_flash_card,
       bookmark_flash_card: this.bookmark_flash_card,
+      get_flash_cards_by_user: this.get_flash_cards_by_user,
     };
   }
 }

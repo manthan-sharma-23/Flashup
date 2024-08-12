@@ -5,4 +5,5 @@ export const FlashCardInputValidator = z.object({
   answer: z.string(),
   isTopic: z.boolean().default(false),
   topicId: z.string().optional(),
+  color: z.string().optional(),
 });

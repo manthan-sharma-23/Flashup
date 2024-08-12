@@ -28,6 +28,12 @@ export default class FlashCardController {
     return await this.flashCardService.get_flash_cards();
   }
 
+  @Get('/user/fc')
+  @UseGuards(AuthenticateJWTToken)
+  async get_flash_cards_by_user(@Req() req: Request) {
+    return await this.flashCardService.get_flash_cards_by_user(req);
+  }
+
   @Post('/create')
   @UseGuards(AuthenticateJWTToken)
   async create_flash_card(@Req() req: Request) {

@@ -2,6 +2,7 @@ import { useGetUser } from "@/core/hooks/useGetUser.hook";
 import { Progress } from "@/components/ui/progress";
 import { Outlet } from "react-router-dom";
 import SideBar from "../utilities/SideBar";
+import { Toaster } from "sonner";
 
 const RootLayout = () => {
   const { loading } = useGetUser();
@@ -22,6 +23,7 @@ const RootLayout = () => {
       <section className="h-full w-[80%]">
         <Outlet />
       </section>
+      <Toaster />
     </div>
   );
 };

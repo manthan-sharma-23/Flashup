@@ -52,6 +52,7 @@ export default class FlashCardService {
         answer: input.answer,
         isTopic: input.isTopic,
         userId,
+        color: input.color,
         topicId: input.topicId || null,
       },
     });
@@ -104,6 +105,22 @@ export default class FlashCardService {
     });
 
     return bookmark;
+  }
+
+  async get_flash_cards_by_user(req: Request) {
+    const flashcards = await this.databaseService.flashcard.findMany({
+      where: {
+        AND: [{ userId: req.user.userId }, { isActive: true }],
+      },
+      include: {
+        Topic: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return flashcards;
   }
 
   async is_flash_card_owner(flashCardId: string, userId: string) {
