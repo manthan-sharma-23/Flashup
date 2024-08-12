@@ -51,5 +51,6 @@ model Flashcard {
   topicId   String?
   User      User       @relation(fields: [userId], references: [id])
   userId    String
+  isActive  Boolean    @default(true)
   Bookmark  Bookmark[]
 }

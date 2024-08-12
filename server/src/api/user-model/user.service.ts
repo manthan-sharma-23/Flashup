@@ -8,7 +8,7 @@ import {
 import { Request } from 'express';
 import DatabaseService from 'src/engine/database/database.service';
 import { BcryptService } from 'src/engine/services/Bcrypt.service';
-import { JwtService } from 'src/engine/services/JwtService.service';
+import { JwtService } from 'src/engine/services/Jwt.service';
 import { UserValidator } from 'src/lib/types/validators/user.validator';
 
 @Injectable()
