@@ -25,7 +25,7 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route
                   path="/dashboard/topic/:topicId"
-                  element={<TopicPage />}
+                  element={<TopicPage isAdmin={true} />}
                 />
                 <Route path="/explore" element={<Explore />} />
               </Route>

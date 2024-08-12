@@ -44,6 +44,9 @@ export default class TopicService {
       },
       include: {
         flashcards: {
+          where: {
+            isActive: true,
+          },
           orderBy: {
             createdAt: 'desc',
           },

@@ -4,22 +4,22 @@ import { useMutation } from "@tanstack/react-query";
 import FlashCardModule from "../api/flashcard.module";
 import { toast } from "sonner";
 
-export const useCreateFlashCard = () => {
+export const useDeleteFlashCard = () => {
   const setFlashCards = useSetRecoilState(DASHBOARD_FLASHCARDS);
   const {
-    mutate: create_flashcard,
+    mutate: delete_flashcard,
     isPending: loading,
     isError: error,
   } = useMutation({
-    mutationFn: new FlashCardModule().flashCard.create_flash_card,
+    mutationFn: new FlashCardModule().flashCard.delete_flash_card,
     onSuccess: (data) => {
-      toast.success("Flash Card created successfully");
-      setFlashCards((v) => [...v, data]);
+      setFlashCards((cards) => cards.filter((card) => card.id !== data.id));
+      toast.success("Flash Card deleted successfully");
     },
     onError: (err: { response: { data: { message: string } } }) => {
       toast.error(err.response.data.message);
     },
   });
 
-  return { create_flashcard, loading, error };
+  return { delete_flashcard, loading, error };
 };

@@ -1,11 +1,17 @@
 import Loading from "@/components/ui/Loading";
 import { useGetTopicFlashCards } from "@/core/hooks/useGetTopicFlashCards";
 import { useParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import FlashCardTile from "@/components/utilities/FlashCardTile";
+import CreateFlashCardButton from "@/components/utilities/CreateFlashCardButton";
+import RunCards from "@/components/utilities/RunCards";
+import { useRecoilValue } from "recoil";
+import { DASHBOARD_FLASHCARDS } from "@/core/store/atoms/flashcards.atom";
 
-const TopicPage = () => {
+const TopicPage = ({ isAdmin = false }: { isAdmin?: boolean }) => {
   const { topicId } = useParams();
-  const { topic, loading } = useGetTopicFlashCards({ topicId: topicId! });
+  const { topic, loading } = useGetTopicFlash
+  Cards({ topicId: topicId! });
+  const flashcards = useRecoilValue(DASHBOARD_FLASHCARDS);
 
   if (!topic) return <div>No Topic found</div>;
 
@@ -28,10 +34,18 @@ const TopicPage = () => {
             </p>
           )}
         </div>
-        <Button>Run</Button>
+        <div className="flex gap-2 items-center justify-center">
+          <RunCards cards={topic.flashcards} />
+          {isAdmin && <CreateFlashCardButton />}
+        </div>
       </div>
       <p className="mt-4">{topic.flashcards.length} Flashcards</p>
-      <div>{}</div>
+      <div className="mt-4 w-full flex flex-wrap justify-start items-start gap-2">
+        {flashcards &&
+          flashcards.map((fc) => {
+            return <FlashCardTile key={fc.id} flashCard={fc} />;
+          })}
+      </div>
     </div>
   );
 };

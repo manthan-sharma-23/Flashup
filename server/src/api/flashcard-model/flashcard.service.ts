@@ -65,7 +65,7 @@ export default class FlashCardService {
 
     await this.is_flash_card_owner(flashCardId, userId);
 
-    await this.databaseService.flashcard.update({
+    const fc = await this.databaseService.flashcard.update({
       where: {
         id: flashCardId,
       },
@@ -73,10 +73,12 @@ export default class FlashCardService {
         isActive: false,
       },
     });
-    return true;
+    return fc;
   }
 
   async update_flash_card(flashCardId: string, req: Request) {
+    console.log(flashCardId);
+
     await this.is_flash_card_owner(flashCardId, req.user.userId);
 
     const input = FlashCardInputValidator.parse(req.body);

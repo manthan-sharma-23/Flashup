@@ -40,4 +40,5 @@ export interface Flashcard {
   userId: string;
   isActive: boolean;
   Bookmark: Bookmark[];
+  color: string;
 }

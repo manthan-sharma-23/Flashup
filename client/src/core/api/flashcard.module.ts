@@ -70,7 +70,7 @@ export default class FlashCardModule {
           Authorization: this.token,
         },
       })
-    ).data as boolean;
+    ).data as Flashcard;
     return data;
   };
 
@@ -82,12 +82,15 @@ export default class FlashCardModule {
     input: FlashCardInput;
   }) => {
     const data = (
-      await axios.put(this.base_url + `/update_flash_card/${flashCardId}`, {
+      await axios.put(
+        this.base_url + `/update_flash_card/${flashCardId}`,
         input,
-        headers: {
-          Authorization: this.token,
-        },
-      })
+        {
+          headers: {
+            Authorization: this.token,
+          },
+        }
+      )
     ).data as Flashcard;
     return data;
   };

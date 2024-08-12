@@ -1,5 +1,6 @@
 import Loading from "@/components/ui/Loading";
 import CreateFlashCardButton from "@/components/utilities/CreateFlashCardButton";
+import FlashCardTile from "@/components/utilities/FlashCardTile";
 import { useGetFlashCardsByUser } from "@/core/hooks/useGetFlashCards";
 
 const Flashcards = () => {
@@ -19,11 +20,19 @@ const Flashcards = () => {
         <p className="font-poppins text-black/60 text-xl">
           No Flash cards found, create some :)
         </p>
-        <CreateFlashCardButton />
+        <CreateFlashCardBu
+        tton />
       </div>
     );
   }
-  return <div>{JSON.stringify(flashcards)}</div>;
+  return (
+    <div className="mt-4 w-full flex flex-wrap justify-start items-start gap-2">
+      {flashcards &&
+        flashcards.map((fc) => {
+          return <FlashCardTile flashCard={fc} />;
+        })}
+    </div>
+  );
 };
 
 export default Flashcards;

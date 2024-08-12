@@ -4,4 +4,5 @@ export interface FlashCardInput {
   isTopic: boolean;
   topicId?: string;
   color: string;
+  id?: string;
 }
