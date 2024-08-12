@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Flashcard` ADD COLUMN `color` VARCHAR(191) NOT NULL DEFAULT '#FFFFFF';

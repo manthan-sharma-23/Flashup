@@ -14,6 +14,7 @@ export default class FlashCardService {
       },
       include: {
         User: true,
+        Topic: true,
       },
       orderBy: {
         createdAt: 'desc',
@@ -24,16 +25,20 @@ export default class FlashCardService {
   }
 
   async get_flash_card(flashCardId: string) {
-    const flashCard = this.databaseService.flashcard.findFirstOrThrow({
+    const flashCard = await this.databaseService.flashcard.findFirstOrThrow({
       where: {
         id: flashCardId,
       },
       include: {
         User: true,
         Bookmark: false,
+        Topic: true,
       },
     });
 
+    if (!flashCard.isActive) {
+      throw new UnauthorizedException("Flash card isn't active any more");
+    }
     return flashCard;
   }
 
@@ -86,6 +91,19 @@ export default class FlashCardService {
     });
 
     return flashCard;
+  }
+
+  async bookmark_flash_card(flashCardId: string, req: Request) {
+    const { userId } = req.user;
+
+    const bookmark = await this.databaseService.bookmark.create({
+      data: {
+        userId,
+        flashcardId: flashCardId,
+      },
+    });
+
+    return bookmark;
   }
 
   async is_flash_card_owner(flashCardId: string, userId: string) {

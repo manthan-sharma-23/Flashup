@@ -5,6 +5,8 @@ import Signup from "@/views/auth/Signup";
 import Signin from "@/views/auth/Signin";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import RootLayout from "./components/layouts/RootLayout";
+import Dashboard from "./views/app/Dashboard/Dashboard";
+import Explore from "./views/app/Explore/Explore";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -18,7 +20,10 @@ const App = () => {
                 <Route path="/auth/signin" element={<Signin />} />
                 <Route path="/auth/signup" element={<Signup />} />
               </Route>
-              <Route path="/" element={<RootLayout />}></Route>
+              <Route path="/" element={<RootLayout />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/explore" element={<Explore />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </RecoilRoot>

@@ -18,7 +18,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        shade: "#F2F2F2"
+        shade: "#F2F2F2",
+        dark: "#B2B2B2"
+      },
+      fontFamily: {
+        poppins: "Poppins"
       },
       keyframes: {
         "accordion-down": {

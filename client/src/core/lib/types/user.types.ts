@@ -15,3 +15,5 @@ export interface LoggedUser {
   token: token;
   message: string;
 }
+
+export type filterDashboard = "topics" | "flashcards";

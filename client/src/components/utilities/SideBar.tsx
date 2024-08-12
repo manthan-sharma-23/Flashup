@@ -11,16 +11,16 @@ import { twMerge } from "tailwind-merge";
 // eslint-disable-next-line react-refresh/only-export-components
 export const navlinks = [
   {
-    icon: MdDashboard,
-    label: "Dashboard",
-    path: "/dashboard",
-    color: "text-pink-400",
-  },
-  {
     icon: TbCardsFilled,
     label: "Explore",
     path: "/explore",
     color: "text-yellow-400",
+  },
+  {
+    icon: MdDashboard,
+    label: "Dashboard",
+    path: "/dashboard",
+    color: "text-pink-400",
   },
   {
     icon: MdOutlineBookmarks,
@@ -49,13 +49,14 @@ const SideBar = () => {
       <div className="flex flex-col h-auto w-full justify-start items-center p-4 gap-2 text-[1rem]">
         {navlinks.map((link) => (
           <Link
+            key={link.path}
             to={link.path}
             className={twMerge(
               "w-full flex justify-start items-center gap-2 hover:bg-shade py-1 px-3 rounded-md",
               pathname === link.path && "bg-shade"
             )}
           >
-            <link.icon className={twMerge(link.color)} />
+            <link.icon className={twMerge("text-[1.1rem]", link.color)} />
             <p>{link.label}</p>
           </Link>
         ))}

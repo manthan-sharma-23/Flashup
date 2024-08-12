@@ -33,12 +33,14 @@ model Bookmark {
 }
 
 model Topic {
-  id         String      @id @default(uuid())
-  name       String
-  flashcards Flashcard[]
-  createdAt  DateTime    @default(now())
-  User       User        @relation(fields: [userId], references: [id])
-  userId     String
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  flashcards  Flashcard[]
+  createdAt   DateTime    @default(now())
+  User        User        @relation(fields: [userId], references: [id])
+  userId      String
+  isActive    Boolean     @default(true)
 }
 
 model Flashcard {
@@ -51,6 +53,7 @@ model Flashcard {
   topicId   String?
   User      User       @relation(fields: [userId], references: [id])
   userId    String
+  color     String     @default("#FFFFFF")
   isActive  Boolean    @default(true)
   Bookmark  Bookmark[]
 }
