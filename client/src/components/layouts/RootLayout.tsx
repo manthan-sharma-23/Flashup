@@ -1,6 +1,5 @@
 import { useGetUser } from "@/core/hooks/useGetUser.hook";
-import { Progress } from "@/components/ui/progress";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import SideBar from "../utilities/SideBar";
 import { Toaster } from "sonner";
 import Loading from "../ui/Loading";

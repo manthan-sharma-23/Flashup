@@ -2,7 +2,6 @@ import Loading from "@/components/ui/Loading";
 import FlashCardTile from "@/components/utilities/FlashCardTile";
 import RunCards from "@/components/utilities/RunCards";
 import { useGetAllFlashCards } from "@/core/hooks/useGetAllFlashCards";
-import React from "react";
 
 const ExploreFlashCards = () => {
   const { flashcards, loading } = useGetAllFlashCards();
