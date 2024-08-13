@@ -4,14 +4,14 @@ import { useParams } from "react-router-dom";
 import FlashCardTile from "@/components/utilities/FlashCardTile";
 import CreateFlashCardButton from "@/components/utilities/CreateFlashCardButton";
 import RunCards from "@/components/utilities/RunCards";
-import { useRecoilValue } from "recoil";
-import { DASHBOARD_FLASHCARDS } from "@/core/store/atoms/flashcards.atom";
 
 const TopicPage = ({ isAdmin = false }: { isAdmin?: boolean }) => {
   const { topicId } = useParams();
-  const { topic, loading } = useGetTopicFlashCards({ topicId: topicId! });
-  const flashcards = useRecoilValue(DASHBOARD_FLASHCARDS);
-
+  const {
+    flashCards: fc,
+    topic,
+    loading,
+  } = useGetTopicFlashCards({ topicId: topicId! });
   if (!topic) return <div>No Topic found</div>;
 
   if (loading) {
@@ -40,8 +40,8 @@ const TopicPage = ({ isAdmin = false }: { isAdmin?: boolean }) => {
       </div>
       <p className="mt-4">{topic.flashcards.length} Flashcards</p>
       <div className="mt-4 w-full flex flex-wrap justify-start items-start gap-2">
-        {flashcards &&
-          flashcards.map((fc) => {
+        {fc &&
+          fc.map((fc) => {
             return <FlashCardTile key={fc.id} flashCard={fc} />;
           })}
       </div>
