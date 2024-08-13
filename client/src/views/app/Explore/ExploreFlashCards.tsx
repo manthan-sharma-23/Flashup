@@ -30,7 +30,7 @@ const ExploreFlashCards = () => {
       </div>
       <div className="overflow-y-scroll mt-4 flex justify-start items-start flex-wrap gap-3 h-[75vh]">
         {flashcards.map((card) => (
-          <FlashCardTile flashCard={card} />
+          <FlashCardTile flashCard={card} isAdmin={false}/>
         ))}
       </div>
     </div>
