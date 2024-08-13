@@ -18,6 +18,11 @@ export default class TopicController {
   async get_user_topics(@Req() req: Request) {
     return await this.topicService.get_user_topics(req);
   }
+  @Get('/all')
+  @UseGuards(AuthenticateJWTToken)
+  async get_all_topics() {
+    return await this.topicService.get_all_topics();
+  }
 
   @Get('/topic/:topicId')
   @UseGuards(AuthenticateJWTToken)

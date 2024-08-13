@@ -33,6 +33,28 @@ export default class TopicService {
 
     return topics;
   }
+  async get_all_topics() {
+    const topics = await this.databaseService.topic.findMany({
+      where: {
+        AND: [{ isActive: true }],
+      },
+      include: {
+        flashcards: {
+          where: {
+            isActive: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          },
+          include: {
+            User: true,
+          },
+        },
+      },
+    });
+
+    return topics;
+  }
 
   async get_topic_flashcard(topicId: string, req: Request) {
     const { userId } = req.user;

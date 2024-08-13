@@ -16,22 +16,27 @@ import FlashCardService from './flashcard.service';
 export default class FlashCardController {
   constructor(private flashCardService: FlashCardService) {}
 
-  @Get('/:flashCardId')
-  @UseGuards(AuthenticateJWTToken)
-  async get_flash_card(@Param() { flashCardId }: { flashCardId: string }) {
-    return await this.flashCardService.get_flash_card(flashCardId);
-  }
-
   @Get('/all')
   @UseGuards(AuthenticateJWTToken)
   async get_all_cards() {
-    return await this.flashCardService.get_flash_cards();
+    return await this.flashCardService.get_all_flash_cards();
+  }
+  @Get('/user-bookmarks')
+  @UseGuards(AuthenticateJWTToken)
+  async get_user_bookmarks(@Req() req: Request) {
+    return await this.flashCardService.get_user_bookmarks(req);
   }
 
   @Get('/user/fc')
   @UseGuards(AuthenticateJWTToken)
   async get_flash_cards_by_user(@Req() req: Request) {
     return await this.flashCardService.get_flash_cards_by_user(req);
+  }
+
+  @Get('/:flashCardId')
+  @UseGuards(AuthenticateJWTToken)
+  async get_flash_card(@Param() { flashCardId }: { flashCardId: string }) {
+    return await this.flashCardService.get_flash_card(flashCardId);
   }
 
   @Post('/create')
@@ -58,7 +63,7 @@ export default class FlashCardController {
     return await this.flashCardService.update_flash_card(flashCardId, req);
   }
 
-  @Put('/bookmark/:flashCardId')
+  @Post('/bookmark/:flashCardId')
   @UseGuards(AuthenticateJWTToken)
   async bookmark_flash_card(
     @Param() { flashCardId }: { flashCardId: string },

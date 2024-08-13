@@ -23,6 +23,8 @@ export default class AuthenticateJWTToken implements CanActivate {
     const user = this.jwtService.decode_token(token);
 
     if (!user.userId) {
+      console.log('Unautthorized user');
+
       return false;
     }
 

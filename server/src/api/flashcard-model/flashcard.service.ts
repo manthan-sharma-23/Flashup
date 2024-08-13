@@ -7,8 +7,10 @@ import { FlashCardInputValidator } from 'src/lib/types/validators/flashcard.vali
 export default class FlashCardService {
   constructor(private databaseService: DatabaseService) {}
 
-  async get_flash_cards() {
-    const flashCards = this.databaseService.flashcard.findMany({
+  async get_all_flash_cards() {
+    console.log('ALL REQUEST');
+
+    const flashCards = await this.databaseService.flashcard.findMany({
       where: {
         isActive: true,
       },
@@ -22,6 +24,22 @@ export default class FlashCardService {
     });
 
     return flashCards;
+  }
+  async get_user_bookmarks(req: Request) {
+    const bookmarks = await this.databaseService.bookmark.findMany({
+      where: {
+        userId: req.user.userId,
+      },
+      include: {
+        flashCard: {
+          include: {
+            User: true,
+          },
+        },
+      },
+    });
+
+    return bookmarks;
   }
 
   async get_flash_card(flashCardId: string) {
@@ -98,6 +116,18 @@ export default class FlashCardService {
 
   async bookmark_flash_card(flashCardId: string, req: Request) {
     const { userId } = req.user;
+
+    console.log('BOOKMARK', flashCardId);
+
+    const userbookmark = await this.databaseService.bookmark.findFirst({
+      where: {
+        AND: [{ userId }, { flashcardId: flashCardId }],
+      },
+    });
+
+    if (userbookmark) {
+      return userbookmark;
+    }
 
     const bookmark = await this.databaseService.bookmark.create({
       data: {
