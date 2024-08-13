@@ -72,6 +72,9 @@ export default class TopicService {
           orderBy: {
             createdAt: 'desc',
           },
+          include: {
+            User: true,
+          },
         },
       },
     });
