@@ -1,6 +1,6 @@
 import axios from "axios";
 import { configurations } from "../lib/config/config";
-import { Flashcard } from "../lib/types/global.types";
+import { Bookmark, Flashcard } from "../lib/types/global.types";
 import { FlashCardInput } from "../lib/types/flashcard.types";
 
 export default class FlashCardModule {
@@ -101,17 +101,33 @@ export default class FlashCardModule {
     flashCardId: string;
   }) => {
     const data = (
-      await axios.put(this.base_url + `/bookmark/${flashCardId}`, {
+      await axios.post(
+        this.base_url + `/bookmark/${flashCardId}`,
+        {},
+        {
+          headers: {
+            Authorization: this.token,
+          },
+        }
+      )
+    ).data as Flashcard;
+    return data;
+  };
+
+  private get_all_bookmarks = async () => {
+    const data = (
+      await axios.get(this.base_url + `/user-bookmarks`, {
         headers: {
           Authorization: this.token,
         },
       })
-    ).data as Flashcard;
+    ).data as Bookmark[];
     return data;
   };
 
   get flashCard() {
     return {
+      get_all_bookmarks: this.get_all_bookmarks,
       get_flash_card: this.get_flash_card,
       get_all_flash_cards: this.get_all_flash_cards,
       create_flash_card: this.create_flash_card,

@@ -13,7 +13,7 @@ const DashboardTopicCard = ({ topic }: { topic: Topic }) => {
         navigate(`/dashboard/topic/${topic.id}`);
       }}
       className={twMerge(
-        ` text-white flex flex-col items-start justify-end font-poppins h-[15rem]  w-[12rem] m-3 hover:scale-105 duration-150 cursor-pointer rounded-xl p-3 overflow-hidden border-4 `
+        ` text-white flex flex-col items-start justify-end font-poppins h-[15rem]  w-[12rem] m-2 cursor-pointer rounded-xl p-3 overflow-hidden border-4 `
       )}
       style={{
         backgroundColor: randomColor.light,

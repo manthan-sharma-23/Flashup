@@ -20,8 +20,7 @@ const Flashcards = () => {
         <p className="font-poppins text-black/60 text-xl">
           No Flash cards found, create some :)
         </p>
-        <CreateFlashCardBu
-        tton />
+        <CreateFlashCardButton />
       </div>
     );
   }

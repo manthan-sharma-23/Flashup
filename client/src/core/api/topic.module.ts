@@ -1,6 +1,6 @@
 import axios from "axios";
 import { configurations } from "../lib/config/config";
-import { Flashcard, Topic } from "../lib/types/global.types";
+import { Topic } from "../lib/types/global.types";
 import { TopicInput } from "../lib/types/topic.type";
 
 export default class TopicModule {
@@ -33,6 +33,16 @@ export default class TopicModule {
     ).data as Topic[];
     return data;
   };
+  private get_all_topics = async () => {
+    const data = (
+      await axios.get(this.base_url + `/all`, {
+        headers: {
+          Authorization: this.token,
+        },
+      })
+    ).data as Topic[];
+    return data;
+  };
 
   private get_topic_flash_cards = async ({ topicId }: { topicId: string }) => {
     const data = (
@@ -50,6 +60,7 @@ export default class TopicModule {
       create_topic: this.create_topic,
       get_topics: this.get_topics,
       get_topic_flash_cards: this.get_topic_flash_cards,
+      get_all_topics: this.get_all_topics,
     };
   }
 }

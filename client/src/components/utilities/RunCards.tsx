@@ -10,15 +10,14 @@ import {
 } from "@/components/ui/carousel";
 import { colors } from "@/core/lib/constants/color";
 import { FaRegBookmark } from "react-icons/fa";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import "@/styles/flip.css";
+import { useBookMarkFlashCard } from "@/core/hooks/useAddBookMark";
 
-const RunCards = ({ cards }: { cards: Flashcard[] }) => {
+const RunCards = ({ cards, rc }: { cards: Flashcard[]; rc?: ReactNode }) => {
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button>Play Cards</Button>
-      </DialogTrigger>
+      <DialogTrigger>{rc || <Button>Play Cards</Button>}</DialogTrigger>
       <DialogContent className="bg-transparent border-0 shadow-none">
         <Carousel className="">
           <CarouselContent>
@@ -36,6 +35,7 @@ const RunCards = ({ cards }: { cards: Flashcard[] }) => {
 const Card = ({ card }: { card: Flashcard }) => {
   const color = colors.find((color) => card.color === color.light)!;
   const [front, setFront] = useState(true);
+  const { bookmark } = useBookMarkFlashCard();
 
   return (
     <CarouselItem className="h-[60vh] w-[5vw] perspective-1000">
@@ -51,7 +51,15 @@ const Card = ({ card }: { card: Flashcard }) => {
             <p className="text-5xl font-poppins font-semibold ">
               {card.question}
             </p>
-            <FaRegBookmark className="absolute bottom-0 right-0 mb-7 mr-7 text-2xl cursor-pointer" />
+            <p className=" absolute mb-7 ml-7 left-0 bottom-0">
+              Created by: {card.User.name}
+            </p>
+            <FaRegBookmark
+              onClick={() => {
+                bookmark({ flashCardId: card.id });
+              }}
+              className="absolute bottom-0 right-0 mb-7 mr-7 text-2xl cursor-pointer"
+            />
           </div>
         </div>
         <div
@@ -62,7 +70,15 @@ const Card = ({ card }: { card: Flashcard }) => {
             <p className="text-5xl font-poppins font-semibold text-white">
               {card.answer}
             </p>
-            <FaRegBookmark className="absolute bottom-0 right-0 mb-7 mr-7 text-2xl cursor-pointer text-white" />
+            <p className="text-white absolute mb-7 ml-7 left-0 bottom-0">
+              Created by: {card.User.name}
+            </p>
+            <FaRegBookmark
+              onClick={() => {
+                bookmark({ flashCardId: card.id });
+              }}
+              className="absolute bottom-0 right-0 mb-7 mr-7 text-2xl cursor-pointer text-white"
+            />
           </div>
         </div>
       </div>

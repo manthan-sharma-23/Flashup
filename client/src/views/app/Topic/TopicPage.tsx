@@ -9,8 +9,7 @@ import { DASHBOARD_FLASHCARDS } from "@/core/store/atoms/flashcards.atom";
 
 const TopicPage = ({ isAdmin = false }: { isAdmin?: boolean }) => {
   const { topicId } = useParams();
-  const { topic, loading } = useGetTopicFlash
-  Cards({ topicId: topicId! });
+  const { topic, loading } = useGetTopicFlashCards({ topicId: topicId! });
   const flashcards = useRecoilValue(DASHBOARD_FLASHCARDS);
 
   if (!topic) return <div>No Topic found</div>;

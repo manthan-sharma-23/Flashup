@@ -25,7 +25,7 @@ const Topics = () => {
     );
   }
   return (
-    <div className="h-full w-full flex justify-start items-start flex-wrap gap-2">
+    <div className="h-full w-full flex justify-start items-start flex-wrap gap-1">
       {topics &&
         topics.map((topic) => (
           <DashboardTopicCard key={topic.id} topic={topic} />

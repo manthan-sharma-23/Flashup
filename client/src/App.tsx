@@ -8,6 +8,7 @@ import RootLayout from "./components/layouts/RootLayout";
 import Dashboard from "./views/app/Dashboard/Dashboard";
 import Explore from "./views/app/Explore/Explore";
 import TopicPage from "./views/app/Topic/TopicPage";
+import BookMark from "./views/app/Bookmarks/BookMark";
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => {
                   element={<TopicPage isAdmin={true} />}
                 />
                 <Route path="/explore" element={<Explore />} />
+                <Route path="/bookmarks" element={<BookMark />} />
               </Route>
             </Routes>
           </BrowserRouter>
