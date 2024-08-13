@@ -12,6 +12,7 @@ export const useGetUser = () => {
   } = useQuery({
     queryKey: ["user", "get"],
     queryFn: () => new UserModule().user.get_user(),
+    throwOnError: true,
   });
 
   const setUser = useSetRecoilState(UserAtom);

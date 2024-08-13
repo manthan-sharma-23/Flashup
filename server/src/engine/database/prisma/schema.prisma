@@ -53,7 +53,7 @@ model Flashcard {
   topicId   String?
   User      User       @relation(fields: [userId], references: [id])
   userId    String
-  color     String     @default("#FFFFFF")
+  color     String     @default("#4da6ff")
   isActive  Boolean    @default(true)
   Bookmark  Bookmark[]
 }
